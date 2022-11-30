@@ -17,11 +17,14 @@
         },
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.eslint.json"
     },
     "plugins": [
         "react",
         "@typescript-eslint"
+    ],
+    "ignorePatterns": [
+        "*.ts"
     ],
     "rules": {
         "react/jsx-uses-react": [
