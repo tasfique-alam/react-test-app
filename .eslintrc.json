@@ -32,6 +32,7 @@
         ],
         "react/react-in-jsx-scope": [
             "off"
-        ]
+        ],
+        "import/order" :["off"]
     }
 }
