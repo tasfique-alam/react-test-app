@@ -48,6 +48,7 @@ function LauncherView() {
     dispatch(getLaunchers());
     setAllUsers(personDataArray);
     setSearchedUsers(personDataArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onChangeSearch = (val: string) => {
     setSearch(val);

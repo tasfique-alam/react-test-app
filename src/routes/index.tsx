@@ -14,6 +14,7 @@ function AllRoutes() {
 
   useEffect(() => {
     document.title = titles[pathname] ?? 'Sorry';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (

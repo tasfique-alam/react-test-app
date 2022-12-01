@@ -24,7 +24,7 @@
         "@typescript-eslint"
     ],
     "ignorePatterns": [
-        "*.ts"
+        "*.ts", "*.js"
     ],
     "rules": {
         "react/jsx-uses-react": [
