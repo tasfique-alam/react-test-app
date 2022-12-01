@@ -52,6 +52,7 @@ function LauncherView() {
   useEffect(() => {
     setAllUsers(personDataArray);
     setSearchedUsers(personDataArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const onChangeSearch = (val: string) => {
