@@ -6,8 +6,9 @@ import {
 } from '@ant-design/icons';
 import {
   Card, Col, Divider, MenuProps, Row,
-  Layout, Menu,
+  Layout, Menu, Input,
 } from 'antd';
+import { AnyArray } from 'immer/dist/internal';
 
 const {
   Header, Content, Sider,
@@ -32,21 +33,34 @@ function getItem(
 function LauncherView() {
   const { data, loading } = useAppSelector((state) => state.launchers);
   const dispatch = useAppDispatch();
-
-  console.log('data', data);
-
-  useEffect(() => {
-    dispatch(getLaunchers());
-  }, []);
+  const [search, setSearch] = useState('');
+  const [collapsed, setCollapsed] = useState(false);
+  const [searchedUsers, setSearchedUsers] = useState<AnyArray>([]);
+  const [allUsers, setAllUsers] = useState<AnyArray>([]);
 
   const items: MenuItem[] = [
     getItem('Users', 'sub1', <UserOutlined />),
   ];
-
-  const [collapsed, setCollapsed] = useState(false);
-
   const personData = Object.values(data);
   const personDataArray = personData.filter((item: any) => item !== true);
+
+  useEffect(() => {
+    dispatch(getLaunchers());
+    setAllUsers(personDataArray);
+    setSearchedUsers(personDataArray);
+  }, []);
+  const onChangeSearch = (val: string) => {
+    setSearch(val);
+    if (val === '') {
+      setSearchedUsers(allUsers);
+      return;
+    }
+
+    const matchedUsers = allUsers.filter(
+      (obj: any) => JSON.stringify(obj.username).toLowerCase().includes(val.toLowerCase()),
+    );
+    setSearchedUsers(matchedUsers);
+  };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -57,9 +71,10 @@ function LauncherView() {
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
         <Content style={{ margin: '0 16px', maxHeight: '100vh', overflow: 'scroll' }}>
-          <Divider orientation="left">Users Data</Divider>
+          <h3 style={{ padding: 20 }}>Search by username</h3>
+          <Input value={search} onChange={(e: any) => onChangeSearch(e.target.value)} placeholder="Search by username" />
           <Row gutter={16} style={{ marginBottom: 200 }}>
-            {personDataArray?.length > 0 && personDataArray?.map((item: any) => (
+            {searchedUsers?.length > 0 && searchedUsers?.map((item: any) => (
               <Col key={item.id} className="gutter-row" span={6}>
                 <Card title={`Username: ${item.username}`} bordered={false} style={{ width: 350, marginTop: 20 }} loading={loading}>
                   <p>

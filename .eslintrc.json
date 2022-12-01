@@ -33,6 +33,7 @@
         "react/react-in-jsx-scope": [
             "off"
         ],
-        "import/order" :["off"]
+        "import/order" :["off"],
+        "max-len" :["off"]
     }
 }
