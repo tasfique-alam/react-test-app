@@ -38,6 +38,11 @@ function LauncherView() {
   const [searchedUsers, setSearchedUsers] = useState<AnyArray>([]);
   const [allUsers, setAllUsers] = useState<AnyArray>([]);
 
+  useEffect(() => {
+    dispatch(getLaunchers());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const items: MenuItem[] = [
     getItem('Users', 'sub1', <UserOutlined />),
   ];
@@ -45,11 +50,10 @@ function LauncherView() {
   const personDataArray = personData.filter((item: any) => item !== true);
 
   useEffect(() => {
-    dispatch(getLaunchers());
     setAllUsers(personDataArray);
     setSearchedUsers(personDataArray);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loading]);
+
   const onChangeSearch = (val: string) => {
     setSearch(val);
     if (val === '') {
@@ -57,11 +61,10 @@ function LauncherView() {
       return;
     }
 
-    const matchedUsers = allUsers.filter(
-      (obj: any) => JSON.stringify(obj.username).toLowerCase().includes(val.toLowerCase()),
-    );
+    const matchedUsers: any = allUsers.length > 0 && allUsers.filter((obj: any) => JSON.stringify(obj.username).toLowerCase().includes(val.toLowerCase()));
     setSearchedUsers(matchedUsers);
   };
+  console.log('searchedUsers', searchedUsers);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
