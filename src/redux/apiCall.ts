@@ -16,7 +16,6 @@ export interface ApiDataType {
 export const defaultHeaders = () => ({
     'Content-Type': 'application/json',
     'device-type': 'WEB',
-    'Accept-Language': `application/json`,
 })
 
 
@@ -51,7 +50,6 @@ const httpRequest = async (apiData: ApiDataType) => {
         headers: {
             'Content-Type': 'application/json',
             'device-type': 'WEB',
-            'Accept-Language': `application/json`,
             ...headers,
         },
     };

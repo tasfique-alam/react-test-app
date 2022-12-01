@@ -32,7 +32,7 @@ export const launchersSlice = createSlice({
             state.success = true;
             state.error = action.payload.error;
             state.message = action.payload.message;
-            state.data = action.payload.data;
+            state.data = action.payload;
         })
         builder.addCase(getLaunchers.rejected, (state: LaunchersState, action) => {
             const payload = action.payload as LaunchersState;
