@@ -65,7 +65,6 @@ function LauncherView() {
     const matchedUsers: any = allUsers.length > 0 && allUsers.filter((obj: any) => JSON.stringify(obj.username).toLowerCase().includes(val.toLowerCase()));
     setSearchedUsers(matchedUsers);
   };
-  console.log('searchedUsers', searchedUsers);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
